@@ -1,0 +1,42 @@
+import java.util.ArrayList;
+
+class Solution {
+    public int solution(String[][] clothes) {
+        int answer = 0;
+        ArrayList<String> clothesKinds = new ArrayList<>();
+         ArrayList<ArrayList<String>> clothesBox = new ArrayList<>();
+        for(String[] cloth : clothes){
+            if(!clothesKinds.contains(cloth[1])){
+            //    System.out.println(cloth[1]);
+                clothesKinds.add(cloth[1]);
+                clothesBox.add(new ArrayList<>());
+            }
+            int indexNum = 0;
+            for(String s : clothesKinds){
+                if(s.equals (cloth[1])){
+                    break;
+                }
+                indexNum++;
+            }
+            clothesBox.get(indexNum).add(cloth[0]);
+        }
+
+        int mul = clothesBox.get(0).size()+1;
+        for(int i  = 1; i<clothesBox.size(); i++){
+            mul *= (clothesBox.get(i).size()+1);
+        }
+        System.out.println("Mul : "+mul);
+
+        int indexNum = 0;
+        for(ArrayList<String> array : clothesBox){
+            System.out.print(clothesKinds.get(indexNum)+" : ");
+            for(String s :  array){
+                 System.out.print("\""+s+"\" ");
+            }
+            System.out.println();
+            indexNum++;
+        }
+        answer = mul-1;
+        return answer;
+    }
+}
